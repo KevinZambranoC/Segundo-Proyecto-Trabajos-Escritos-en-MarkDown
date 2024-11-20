@@ -1,5 +1,25 @@
-# Segundo-Proyecto-Trabajos-Escritos-en-MarkDown
-Es un proyecto didactico en el cual se nos enseña a crear codigo informativo con markdown, y asi documentar de una forma mejor
+# Guía de Algoritmos de Ordenación y Búsqueda 📘
+
+## Creado por:
+
+- **Josmar Montilva** 🖊️
+- **Kevin Zambrano** 🖊️
+- **Rolando Garcia** 🖊️
+
+---
+
+### Sobre esta guía 📖
+
+Esta guía proporciona una visión detallada de los métodos de ordenación y búsqueda, tanto internos como externos. Cada uno de estos algoritmos ha sido cuidadosamente seleccionado y explicado para ofrecer una comprensión profunda y práctica.
+
+🔄 **Ordenación Interna**: Métodos diseñados para ordenar datos almacenados en la memoria principal.
+
+📂 **Ordenación Externa**: Técnicas utilizadas para manejar grandes volúmenes de datos almacenados externamente.
+
+🔍 **Búsqueda Interna y Externa**: Métodos eficientes para encontrar información en diferentes contextos de almacenamiento.
+
+Esperamos que esta guía sea de gran utilidad para aprender y aplicar estos algoritmos de manera efectiva. ¡Vamos a explorar el fascinante mundo de los algoritmos de ordenación y búsqueda juntos! 🚀
+
 
 # 1. Algoritmos de Ordenación Interna 📝
 
