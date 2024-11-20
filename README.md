@@ -16,7 +16,7 @@ A continuación, se presenta una lista con todos los metodos de ordenación inte
 6. **Heap Sort** ⛰️
 ---
 
-# 1. 1 Bubble Sort ✨
+# 1. 1. Bubble Sort ✨
 
 Bubble Sort es uno de los algoritmos de ordenación más simples. Consiste en recorrer la lista repetidamente y comparar elementos adyacentes, intercambiándolos si están en el orden incorrecto. 🔄
 
@@ -71,7 +71,7 @@ int main() {
 **Uso Práctico** 🎓:
 Bubble Sort se utiliza principalmente con fines educativos debido a su ineficiencia en grandes volúmenes de datos. Es útil para entender conceptos básicos de algoritmos de ordenación. 📚
 
-# 1 . 2 Quick Sort 🚀
+# 1. 2. Quick Sort 🚀
 
 Quick Sort es un algoritmo de ordenación muy eficiente que sigue el enfoque "divide y vencerás". Selecciona un pivote y divide la lista en dos sublistas, ordenando recursivamente cada una. 🪓
 
@@ -140,7 +140,7 @@ int main() {
 **Uso Práctico** 🎓:
 Quick Sort es ampliamente utilizado debido a su eficiencia promedio y a su implementación relativamente sencilla. Sin embargo, es importante manejar adecuadamente el pivote para evitar el peor caso. Es muy utilizado en la biblioteca estándar de varios lenguajes. 📚
 
-# 1. 3 Merge Sort 🧩
+# 1. 3. Merge Sort 🧩
 
 Merge Sort es un algoritmo de ordenación basado en la técnica "divide y vencerás". Divide la lista en dos mitades, las ordena recursivamente y luego combina (merge) las dos listas ordenadas en una sola. 🔀
 
@@ -235,7 +235,7 @@ int main() {
 **Uso Práctico** 🎓:
 Merge Sort es ideal para trabajar con datos grandes, especialmente cuando se necesita estabilidad en la ordenación. Es comúnmente utilizado en situaciones donde la memoria adicional no es un problema y la eficiencia es crucial. 📚
 
-# 1. 4 Insertion Sort ✍️
+# 1. 4. Insertion Sort ✍️
 
 Insertion Sort es un algoritmo de ordenación sencillo y eficiente para listas pequeñas. Funciona construyendo la lista ordenada un elemento a la vez, seleccionando cada elemento y ubicándolo en su posición correcta dentro de la parte ya ordenada del arreglo. 📋
 
@@ -293,7 +293,7 @@ int main() {
 **Uso Práctico** 🎓:
 Insertion Sort es adecuado para listas pequeñas y cuando se necesita un algoritmo simple y fácil de implementar. También es útil para listas casi ordenadas, donde el tiempo de ejecución tiende a ser cercano a O(n). 📚
 
-# 1. 5 Selection Sort 🎯
+# 1. 5. Selection Sort 🎯
 
 Selection Sort es un algoritmo de ordenación sencillo que selecciona repetidamente el elemento más pequeño (o más grande, dependiendo del orden) de la lista no ordenada y lo coloca en la posición correcta. 🔄
 
@@ -351,7 +351,7 @@ int main() {
 **Uso Práctico** 🎓:
 Selection Sort se utiliza principalmente cuando se requiere una implementación sencilla para listas pequeñas. No es adecuado para listas grandes debido a su ineficiencia, pero es útil para enseñar los conceptos básicos de algoritmos de ordenación. 📚
 
-# 1. 6 Heap Sort ⛰️
+# 1. 6. Heap Sort ⛰️
 
 Heap Sort es un algoritmo de ordenación basado en la estructura de datos llamada "heap". Utiliza un árbol binario de máxima o mínima (max-heap o min-heap) para ordenar los elementos. Primero se construye un heap a partir del arreglo y luego se extrae el elemento raíz repetidamente para construir el arreglo ordenado. 🌳
 
@@ -440,7 +440,7 @@ Los algoritmos de ordenación externa se utilizan para ordenar grandes volúmene
 2. **Polyphase Merge Sort** 🔄
 3. **Ordenación por Mezcla en Varios Pasos** 🌐
 
-# 2 . 1 Merge Sort Externo 🧩
+# 2. 1. Merge Sort Externo 🧩
 
 El Merge Sort Externo es una técnica utilizada para ordenar grandes volúmenes de datos que se encuentran almacenados en dispositivos externos. Se basa en dividir los datos en partes más pequeñas que pueden ser ordenadas en la memoria principal y luego fusionarlas de manera eficiente. Este enfoque minimiza la cantidad de lecturas y escrituras en el disco, lo cual es crucial para lograr un buen rendimiento. 🚀
 
@@ -495,7 +495,7 @@ int main() {
     return 0;
 }
 ```
-# 2 . 2 Polyphase Merge Sort 🔄
+# 2. 2. Polyphase Merge Sort 🔄
 
 El Polyphase Merge Sort es una variación del Merge Sort diseñada para optimizar el proceso de fusión en la ordenación externa. Utiliza múltiples archivos temporales para minimizar el número de fusiones y lecturas/escrituras necesarias, lo cual es especialmente beneficioso cuando se trabaja con almacenamiento secundario. 🌀
 
@@ -572,7 +572,7 @@ int main() {
     return 0;
 }
 ```
-# 2 . 3 Ordenación por Mezcla en Varios Pasos 🌐
+# 2. 3. Ordenación por Mezcla en Varios Pasos 🌐
 
 La Ordenación por Mezcla en Varios Pasos (Multi-way Merge Sort) es una técnica que extiende el concepto de fusión a más de dos subarchivos a la vez. En lugar de fusionar dos archivos en cada paso, este método permite fusionar múltiples subarchivos simultáneamente, lo cual reduce el número de pasos necesarios para completar la ordenación. Esta técnica es especialmente útil para reducir el número de accesos a disco y mejorar el rendimiento en la ordenación de grandes volúmenes de datos. 🚀
 
@@ -661,15 +661,19 @@ int main() {
 La Ordenación por Mezcla en Varios Pasos se utiliza cuando se necesita manejar grandes volúmenes de datos almacenados externamente, ya que mejora el rendimiento y minimiza los accesos a disco. Es comúnmente utilizada en la clasificación de registros en bases de datos y aplicaciones que trabajan con almacenamiento masivo. 📚
 
 
-# Algoritmos de Búsqueda Interna 🔍
-
-## Prólogo 📖
+# 3. Algoritmos de Búsqueda Interna 🔍
 
 Los algoritmos de búsqueda interna permiten localizar elementos dentro de una estructura de datos almacenada en la memoria principal. Estos algoritmos son fundamentales para optimizar el acceso y la manipulación de datos en sistemas de software. En esta sección, exploraremos algunos de los métodos de búsqueda interna más comunes, como la Búsqueda Secuencial, la Búsqueda Binaria, y el Hashing. Cada uno tiene sus propias ventajas y limitaciones, dependiendo del tipo de datos y la situación específica. 🔄
 
 ---
+# Algoritmos de Búsqueda 📂
 
-# Búsqueda Secuencial 🔍
+## Métodos de Búsqueda Interna 🔍
+1. **Búsqueda Secuencial** 🔄
+2. **Búsqueda Binaria Interno** ⚡
+3. **Hashing Interno** 🔑
+
+# 3. 1. Búsqueda Secuencial 🔄
 
 La Búsqueda Secuencial es uno de los algoritmos más simples para buscar un elemento en una lista. Se recorre cada elemento uno por uno hasta encontrar el valor deseado o hasta que se hayan revisado todos los elementos. Es especialmente útil para listas pequeñas o cuando los datos no están ordenados. 🔄
 
@@ -721,7 +725,7 @@ int main() {
 **Uso Práctico** 🎓:
 La Búsqueda Secuencial se utiliza en listas pequeñas o en casos donde la eficiencia no es crítica. Es útil para aprender los conceptos básicos de algoritmos de búsqueda y cuando los datos no están ordenados. 📚
 
-# Búsqueda Binaria 📐
+# 3. 2. Búsqueda Binaria Interna ⚡
 
 La Búsqueda Binaria es un algoritmo eficiente para buscar un elemento en una lista ordenada. Se basa en dividir repetidamente el rango de búsqueda a la mitad, comparando el valor buscado con el elemento del medio del rango. Este enfoque permite encontrar el valor deseado con una complejidad logarítmica. ➗
 
@@ -785,7 +789,7 @@ int main() {
 **Uso Práctico** 🎓:
 La Búsqueda Binaria se utiliza comúnmente cuando se requiere un algoritmo rápido y eficiente para listas ordenadas. Se emplea en muchas aplicaciones, como bases de datos y sistemas de búsqueda, para optimizar la localización de información. 📚
 
-# Hashing 🧩
+# 3. 3. Hashing Interno 🔑
 
 El Hashing es una técnica utilizada para almacenar y buscar datos de manera extremadamente rápida. Consiste en convertir una clave (key) en una posición dentro de una tabla, conocida como tabla hash, utilizando una función hash. Este enfoque permite acceder a los datos en un tiempo constante, O(1), en el mejor de los casos. 🔒
 
@@ -878,13 +882,17 @@ int main() {
 **Uso Práctico** 🎓:
 El Hashing se utiliza en bases de datos, estructuras de datos dinámicas como los diccionarios en Python, y en aplicaciones donde el acceso rápido a los datos es crucial, como el almacenamiento en caché y la búsqueda de contraseñas. 📚
 
-# Algoritmos de Búsqueda Externa 📂
-
-## Prólogo 📖
+# 4. Algoritmos de Búsqueda Externa 📂
 
 Los algoritmos de búsqueda externa se utilizan para buscar datos que no se encuentran completamente en la memoria principal, sino en dispositivos de almacenamiento secundarios, como discos duros o bases de datos. Estos métodos son cruciales para trabajar con grandes volúmenes de información que no pueden ser cargados directamente en la memoria. En esta sección, exploraremos varios métodos de búsqueda externa, como la búsqueda secuencial simple, secuencial indexada, binaria y hashing externo. 📁
 
-# Búsqueda Secuencial Simple (Externa) 📂
+## Métodos de Búsqueda Externa 📂
+1. **Búsqueda Secuencial Simple** 📜
+2. **Búsqueda Secuencial Indexada o por Bloques** 🧱
+3. **Búsqueda Binaria Externa** 🌲
+4. **Hashing Externo** 🔐
+
+# 4. 1. Búsqueda Secuencial Simple 📜
 
 La Búsqueda Secuencial Simple es un método utilizado para buscar datos almacenados en dispositivos de almacenamiento externo, como discos duros. Al igual que la búsqueda secuencial interna, se recorren los datos uno por uno hasta encontrar el valor deseado. Este método es muy útil cuando los datos no están en memoria principal y se almacenan en archivos secuenciales. 🗄️
 
@@ -950,7 +958,7 @@ int main() {
 **Uso Práctico** 🎓:
 La Búsqueda Secuencial Simple es útil para trabajar con archivos pequeños que no están en memoria principal y que no están ordenados. Su implementación es sencilla y no requiere estructuras de datos complicadas. Es útil para búsquedas en archivos de registros pequeños o de pruebas. 📚
 
-# Búsqueda Secuencial Indexada (Externa) 📑
+# 4. 2. Búsqueda Secuencial Indexada o por Bloques  🧱
 
 La Búsqueda Secuencial Indexada es un método de búsqueda externa que combina una estructura de índice con la búsqueda secuencial. Se utiliza para mejorar la eficiencia de la búsqueda en grandes archivos externos. La búsqueda comienza con el índice para reducir el rango de búsqueda y luego se realiza una búsqueda secuencial dentro del bloque seleccionado. 📊
 
@@ -1037,7 +1045,7 @@ int main() {
 **Uso Práctico** 🎓:
 La Búsqueda Secuencial Indexada se utiliza en sistemas de bases de datos y archivos muy grandes, donde la búsqueda secuencial simple sería demasiado lenta. Esta técnica permite limitar la cantidad de lecturas al usar un índice que localiza los registros de forma más rápida. 📚
 
-# Búsqueda Binaria (Externa) 📂
+# 4. 3. Búsqueda Binaria Externa 🌲
 
 La Búsqueda Binaria Externa es una técnica que se utiliza cuando los datos están almacenados en dispositivos externos y están organizados de forma ordenada. Similar a la búsqueda binaria interna, esta técnica divide repetidamente el conjunto de datos en dos partes para localizar el valor buscado. Es particularmente eficiente para grandes volúmenes de datos almacenados en discos duros o bases de datos. 📊
 
@@ -1117,7 +1125,7 @@ int main() {
 **Uso Práctico** 🎓:
 La Búsqueda Binaria Externa se utiliza en aplicaciones que necesitan acceder rápidamente a grandes cantidades de datos ordenados en almacenamiento secundario, como bases de datos o grandes archivos de registros. Este método es ideal para optimizar el número de accesos a disco, mejorando la eficiencia de la búsqueda. 📚
 
-# Hashing Externo 🧩
+# 4. 4. Hashing Externo 🔐
 
 El Hashing Externo es una técnica utilizada para gestionar grandes volúmenes de datos que se encuentran almacenados en dispositivos externos, como discos duros. Utiliza una función hash para distribuir los datos en diferentes bloques, conocidos como "buckets", almacenados externamente. Esto permite acceder a los datos de manera muy eficiente, minimizando el número de accesos al disco. 📊
 
