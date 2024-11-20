@@ -2,7 +2,7 @@
 
 ## Creado por:
 
-- **Josmar Montilva V-V-30.163.097** 🖊️
+- **Josmar Montilva V-30.163.097** 🖊️
 - **Kevin Zambrano V-29.929.008** 🖊️
 - **Rolando Garcia V-29.937.372** 🖊️
 
