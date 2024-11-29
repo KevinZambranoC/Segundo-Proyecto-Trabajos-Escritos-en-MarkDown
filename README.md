@@ -475,42 +475,164 @@ El Merge Sort Externo es una técnica utilizada para ordenar grandes volúmenes 
 **Código en C++** 💻:
 ```cpp
 #include <iostream>
-#include <fstream>
 #include <vector>
 #include <algorithm>
+#include <cstdio>
+#include <queue>  
+#include <sstream> 
+
 using namespace std;
 
-void dividirArchivo(const string& nombreArchivo, int tamanioBloque) {
-    ifstream archivoEntrada(nombreArchivo, ios::binary);
-    if (!archivoEntrada.is_open()) {
+struct NodoArchivo {
+    int valor;
+    int indiceSubarchivo;
+
+
+    bool operator<(const NodoArchivo& otro) const {
+        return valor > otro.valor;  
+    }
+};
+
+
+string intToString(int i) {
+    stringstream ss;
+    ss << i;
+    return ss.str();
+}
+
+
+int dividirArchivo(const string& nombreArchivo, int tamanioBloque) {
+    
+    
+    FILE* archivoEntrada = fopen(nombreArchivo.c_str(), "r");
+    if (!archivoEntrada) {
         cout << "No se pudo abrir el archivo." << endl;
-        return;
+        return 0;
     }
 
     vector<int> buffer(tamanioBloque);
     int contador = 0;
+    char linea[1024]; 
 
-    while (!archivoEntrada.eof()) {
-        archivoEntrada.read(reinterpret_cast<char*>(buffer.data()), tamanioBloque * sizeof(int));
-        streamsize elementosLeidos = archivoEntrada.gcount() / sizeof(int);
+    cout << "Leyendo el archivo..." << endl; 
 
-        if (elementosLeidos == 0) break;
 
-        sort(buffer.begin(), buffer.begin() + elementosLeidos);
+    while (fgets(linea, sizeof(linea), archivoEntrada)) {
+        cout << "Procesando línea: " << linea << endl; 
+        istringstream iss(linea); 
+        int num;
+        int i = 0;
 
-        ofstream archivoSalida("subarchivo_" + to_string(contador++) + ".bin", ios::binary);
-        archivoSalida.write(reinterpret_cast<char*>(buffer.data()), elementosLeidos * sizeof(int));
-        archivoSalida.close();
+
+        while (iss >> num && i < tamanioBloque) {
+            buffer[i++] = num;
+        }
+
+
+        if (i == 0) {
+            cout << "Línea vacía o no válida, saltando..." << endl;  // Mensaje de depuración
+            continue;
+        }
+
+
+        sort(buffer.begin(), buffer.begin() + i);
+
+
+        char subarchivoNombre[20];
+        sprintf(subarchivoNombre, "subarchivo_%d.txt", contador++);
+        FILE* archivoSalida = fopen(subarchivoNombre, "w");
+        if (!archivoSalida) {
+            cout << "No se pudo crear el subarchivo." << endl;
+            fclose(archivoEntrada);
+            return 0;
+        }
+
+
+        for (int j = 0; j < i; ++j) {
+            fprintf(archivoSalida, "%d ", buffer[j]);
+        }
+        fprintf(archivoSalida, "\n");  
+        fclose(archivoSalida);
+
+        cout << "Escribiendo subarchivo: " << subarchivoNombre << endl;  
     }
 
-    archivoEntrada.close();
+    fclose(archivoEntrada);
+    return contador;
+}
+
+
+void fusionarSubarchivos(const string& archivoFinal, int numSubarchivos) {
+    vector<FILE*> archivosEntrada(numSubarchivos);
+    
+	
+	    // Abrimos todos los subarchivos
+    for (int i = 0; i < numSubarchivos; ++i) {
+        string nombreArchivo = "subarchivo_" + intToString(i) + ".txt";  
+        archivosEntrada[i] = fopen(nombreArchivo.c_str(), "r");
+
+        if (!archivosEntrada[i]) {
+            cout << "No se pudo abrir el archivo " << nombreArchivo << endl;
+            return;
+        }
+    }
+
+
+    priority_queue<NodoArchivo> minHeap;
+
+    vector<int> buffer(numSubarchivos); 
+
+    for (int i = 0; i < numSubarchivos; ++i) {
+        if (fscanf(archivosEntrada[i], "%d", &buffer[i]) == 1) {
+            minHeap.push({buffer[i], i});
+        }
+    }
+
+    FILE* archivoSalida = fopen(archivoFinal.c_str(), "w");
+
+    if (!archivoSalida) {
+        cout << "No se pudo crear el archivo de salida." << endl;
+        return;
+    }
+
+
+    while (!minHeap.empty()) {
+        NodoArchivo actual = minHeap.top();
+        minHeap.pop();
+
+
+        fprintf(archivoSalida, "%d ", actual.valor);
+
+
+        int indiceSubarchivo = actual.indiceSubarchivo;
+        if (fscanf(archivosEntrada[indiceSubarchivo], "%d", &buffer[indiceSubarchivo]) == 1) {
+            minHeap.push({buffer[indiceSubarchivo], indiceSubarchivo});
+        }
+    }
+
+
+    for (int i = 0; i < numSubarchivos; ++i) {
+        fclose(archivosEntrada[i]);
+    }
+    fclose(archivoSalida);
 }
 
 int main() {
-    string nombreArchivo = "datos_grandes.bin";
-    int tamanioBloque = 100; // Número de elementos que se pueden cargar en memoria
+    string nombreArchivo = "datos_grandes.txt";  
+    int tamanioBloque = 100;  
 
-    dividirArchivo(nombreArchivo, tamanioBloque);
+    int numSubarchivos = dividirArchivo(nombreArchivo, tamanioBloque);
+    
+
+    fusionarSubarchivos("archivo_ordenado.txt", numSubarchivos);
+    
+	if (numSubarchivos == 0) {
+        cout << "No se generaron subarchivos." << endl;
+        return 1;  // Salimos con un código de error
+    }  
+
+    cout << "Proceso de ordenación externo finalizado. El archivo ordenado es 'archivo_ordenado.txt'." << endl;
+     cout << " el numero es:"  << numSubarchivos << endl;
 
     return 0;
 }
@@ -993,25 +1115,61 @@ La Búsqueda Secuencial Indexada es un método de búsqueda externa que combina 
 **Código en C++** 💻:
 ```cpp
 #include <iostream>
-#include <fstream>
 #include <vector>
+#include <cstdio>
+#include <sstream> 
+#include <cstring> 
 using namespace std;
 
 struct Indice {
     int clave;
-    long posicion; // Posición en el archivo
+    long posicion;  
 };
 
-void busquedaSecuencialIndexada(const string& nombreArchivo, const vector<Indice>& indices, int clave) {
-    ifstream archivo(nombreArchivo, ios::binary);
-    if (!archivo.is_open()) {
-        cout << "No se pudo abrir el archivo." << endl;
+
+void crearIndices(const string& nombreArchivo, vector<Indice>& indices, int tamanioBloque) {
+    FILE* archivo = fopen(nombreArchivo.c_str(), "r");
+    if (!archivo) {
+        cout << "No se pudo abrir el archivo: " << nombreArchivo << endl;
         return;
     }
 
-    // Buscar en el índice para reducir el rango de búsqueda
+
+    char linea[1024];
+    long posicionActual = 0;
+    int clave;
+    
+
+    while (fgets(linea, sizeof(linea), archivo)) {
+
+        linea[strcspn(linea, "\n")] = 0;  
+
+        stringstream ss(linea);
+        while (ss >> clave) {
+
+            Indice nuevoIndice = {clave, posicionActual};
+            indices.push_back(nuevoIndice);
+        }
+
+
+        posicionActual = ftell(archivo);
+    }
+
+    fclose(archivo);
+}
+
+void busquedaSecuencialIndexada(const string& nombreArchivo, const vector<Indice>& indices, int clave) {
+
+    FILE* archivo = fopen(nombreArchivo.c_str(), "r");  
+    if (!archivo) {  
+        cout << "No se pudo abrir el archivo: " << nombreArchivo << endl;
+        return;
+    }
+
+
     long inicio = -1;
-    for (const auto& idx : indices) {
+    for (size_t i = 0; i < indices.size(); ++i) {
+        const Indice& idx = indices[i]; 
         if (idx.clave > clave) {
             break;
         }
@@ -1020,34 +1178,63 @@ void busquedaSecuencialIndexada(const string& nombreArchivo, const vector<Indice
 
     if (inicio == -1) {
         cout << "Elemento " << clave << " no encontrado en el archivo." << endl;
-        archivo.close();
+        fclose(archivo);
         return;
     }
 
-    // Realizar búsqueda secuencial en el bloque identificado
-    archivo.seekg(inicio, ios::beg);
+
+    fseek(archivo, inicio, SEEK_SET);
+
     int dato;
-    while (archivo.read(reinterpret_cast<char*>(&dato), sizeof(dato))) {
-        if (dato == clave) {
-            cout << "Elemento " << clave << " encontrado en el archivo." << endl;
-            archivo.close();
-            return;
+    bool encontrado = false;  
+
+    char linea[1024]; 
+
+
+    while (fgets(linea, sizeof(linea), archivo)) {
+
+        linea[strcspn(linea, "\n")] = 0;  
+
+
+        cout << "Leyendo línea: " << linea << endl;
+
+
+        stringstream ss(linea);
+        while (ss >> dato) {
+
+            cout << "Leyendo dato: " << dato << endl;
+
+            if (dato == clave) {
+                cout << "Elemento " << clave << " encontrado en el archivo." << endl;
+                encontrado = true;
+                break; 
+            }
+
+            if (dato > clave) {
+                break;
+            }
         }
-        if (dato > clave) { // Si el dato es mayor, ya no se encontrará el elemento
-            break;
-        }
+        if (encontrado) break;  
     }
 
-    archivo.close();
-    cout << "Elemento " << clave << " no encontrado en el archivo." << endl;
+    if (!encontrado) {
+        cout << "Elemento " << clave << " no encontrado en el archivo." << endl;
+    }
+
+    fclose(archivo); 
 }
 
 int main() {
-    // Índice simulado (en una aplicación real, se generaría previamente)
-    vector<Indice> indices = {{5, 0}, {15, 20}, {25, 40}, {35, 60}};
-    string nombreArchivo = "datos.bin";
-    int clave = 25;
 
+    vector<Indice> indices;
+    string nombreArchivo = "datos.txt"; 
+    int clave = 25;
+    int tamanioBloque = 10;  
+
+  
+    crearIndices(nombreArchivo, indices, tamanioBloque);
+
+ 
     busquedaSecuencialIndexada(nombreArchivo, indices, clave);
 
     return 0;
